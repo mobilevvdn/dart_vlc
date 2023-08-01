@@ -2,6 +2,7 @@
 #include <flutter/flutter_view_controller.h>
 #include <windows.h>
 
+#include "flutter_native_view/flutter_native_view_plugin.h"
 #include "flutter_window.h"
 #include "utils.h"
 

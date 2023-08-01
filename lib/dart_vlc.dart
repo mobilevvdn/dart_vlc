@@ -131,6 +131,7 @@ abstract class DartVLC {
         'dart_vlc.framework',
         'dart_vlc',
       );
+      print("LibPath $libraryPath");
       ffi.DartVLC.initialize(libraryPath);
     } else if (Platform.isIOS) {
       final libraryPath = path.join(

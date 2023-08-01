@@ -1,21 +1,3 @@
-## 0.4.0
-
-- Bumped `ffi` to `2.0.1`.
-- Fixed locking of `VLC::MediaList` during modification.
-- BREAKING CHANGE: Discontinued `NativeVideo` implementation for Windows.
-
-## 0.3.0
-
-- BREAKING CHANGES
-  - Removed iOS support.
-  - Removed macOS support.
-
-## 0.2.1
-
-- Addressed few issues related to `NativeVideo` on Windows (@alexmercerind).
-- Fixed switch case directShow control (@Paradoxu).
-- Fixed Bump `flutter_native_view` and `window_manager` to latest versions (@ashutosh2014, @alexmercerind).
-
 ## 0.2.0
 
 - Addressed multiple Dart-sided memory leaks during FFI interop (@alexmercerind).

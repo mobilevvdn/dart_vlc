@@ -1,33 +1,11 @@
 <h1 align="center"><a href="https://github.com/alexmercerind/dart_vlc">dart_vlc</a></h1>
-<p align="center">Flutter audio / video playback, broadcast & recording library for Windows & Linux.</p>
+<p align="center">Flutter audio/video playback, broadcast & recording library for Windows, Linux & macOS with playlist control</p>
 
-<br />
+[![pub package](https://img.shields.io/pub/v/dart_vlc.svg)](https://pub.dartlang.org/packages/dart_vlc) ![CI/CD](https://github.com/alexmercerind/dart_vlc/actions/workflows/ci.yml/badge.svg?branch=master) [![](https://img.shields.io/twitter/follow/alexmercerind)](https://twitter.com/alexmercerind) [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/alexmercerind) [![Donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow)](https://buymeacoffee.com/alexmercerind) [![Join the chat at https://discord.gg/3h3K3JF](https://img.shields.io/discord/716939396464508958?label=discord)](https://discord.gg/3h3K3JF)
 
-<p align="center">
-  <strong>Sponsored with 💖 by</strong>
-  <br>
-  <a href="https://getstream.io/chat/sdk/flutter/?utm_source=alexmercerind_dart&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=alexmercerind_December2022_FlutterSDK_klmh22" target="_blank">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/28951144/204903234-4a64b63c-2fc2-4eef-be44-d287d27021e5.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/28951144/204903022-bbaa49ca-74c2-4a8f-a05d-af8314bfd2cc.svg">
-      <img alt="Stream Chat" width="350" height="auto" src="https://user-images.githubusercontent.com/28951144/204903022-bbaa49ca-74c2-4a8f-a05d-af8314bfd2cc.svg">
-    </picture>
-  </a>
-  <br>
-    <h5 align="center">
-      Rapidly ship in-app messaging with Stream's highly reliable chat infrastructure and feature-rich SDKs, including Flutter!
-    </h5>
-  <h4 align="center">
-    <a href="https://getstream.io/chat/sdk/flutter/?utm_source=alexmercerind_dart&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=alexmercerind_December2022_FlutterSDK_klmh22" target="_blank">
-    Try the Flutter Chat tutorial
-    </a>
-  </h4>
-</p>
+![](https://alexmercerind.github.io/img/dart_vlc/0.webp)
 
-<br />
-
-<img src='https://alexmercerind.github.io/img/dart_vlc/0.webp'></img>
-<img src='https://alexmercerind.github.io/img/dart_vlc/1.webp'></img>
+![](https://alexmercerind.github.io/img/dart_vlc/1.webp)
 
 ## Installation
 
@@ -58,11 +36,20 @@ dependency_overrides:
 
 Feel free to open a [new issue](https://github.com/alexmercerind/dart_vlc/issues) or [discussion](https://github.com/alexmercerind/dart_vlc/discussions), if you found a bug or need assistance.
 
+## Support
+
+Consider supporting the project by buying me a coffee or starring the repository.
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/alexmercerind)
+[![Donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow)](https://buymeacoffee.com/alexmercerind)
+
+Thanks a lot for your support.
+
 ## Documentation
 
 Checkout [Setup](#setup) section to configure plugin on your platform.
 
-#### Initialize the library.
+#### Initialize the library
 
 ```dart
 void main() {
@@ -82,22 +69,30 @@ For passing VLC CLI arguments, use `commandlineArguments` argument.
 ```dart
 final player = Player(
   id: 69420,
-  commandlineArguments: ['--no-video'],
+  commandlineArguments: ['--no-video']
 );
 ```
 
 #### Create a media for playback.
 
 ```dart
-final file = Media.file(File('C:/music.mp3'));
-final asset = Media.asset('assets/audio/example.mp3');
-final network = Media.network('https://www.example.com/music.aac');
+final media0 = Media.file(
+  File('C:/music.mp3')
+);
 
-// Clip [Media] playback duration.
+final media1 = Media.asset(
+  'assets/audio/example.mp3'
+);
+
+final media2 = Media.network(
+  'https://www.example.com/music.aac'
+);
+
+// Clip the media.
 final media2 = Media.network(
   'https://www.example.com/music.aac',
-  startTime: Duration(seconds: 20),
-  stopTime: Duration(seconds: 60),
+  startTime: Duration(seconds: 20), // Start media from 20 seconds from the beginning.
+  stopTime: Duration(seconds: 60), // End media at 60 seconds from the beginning.
 );
 ```
 
@@ -190,7 +185,9 @@ player.setRate(1.25);
 ```dart
 List<Device> devices = Devices.all;
 
-player.setDevice(devices[0]);
+player.setDevice(
+  devices[0],
+);
 ```
 
 #### Save the video screenshot
@@ -202,6 +199,8 @@ player.takeSnapshot(file, 1920, 1080);
 #### Show the video inside widget tree.
 
 Show `Video` in the `Widget` tree.
+
+**NOTE:** This will cause additional CPU-load due to conversion of video frames to RGBA/BGRA pixel-buffers & `Texture` interop. For better performance, use [NativeVideo](#nativevideo) instead.
 
 ```dart
 class _MyAppState extends State<MyApp> {
@@ -230,7 +229,48 @@ Player player = Player(
 );
 ```
 
-#### Change user agent.
+#### NativeVideo
+
+A more performant `Widget` for showing video inside the `Widget` tree.
+
+This `Widget` is **more performant** compared to `Video` & uses [flutter_native_view](https://github.com/alexmercerind/flutter_native_view.git)
+to embed the video output directly without any texture interop or pixel-buffer copy calls.
+
+But, it is highly dependent on platform & other limitations apply. In general, this widget is more performant & should be used if possible.
+
+1. Edit your `windows/runner/main.cpp` as required [here](https://github.com/alexmercerind/flutter_native_view#setup).
+
+2. Register the plugin with `useFlutterNativeView` as `true`.
+
+```dart
+void main() {
+  DartVLC.initilize(useFlutterNativeView: true);
+  runApp(MyApp());
+}
+```
+
+3. Pass `registerTexture` as `false` when creating `Player` & use `NativeVideo` widget.
+
+```dart
+class _MyAppState extends State<MyApp> {
+  Player player = Player(id: 0, registerTexture: false);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: NativeVideo(
+          player: player,
+          height: 420.0,
+          width: 320.0
+        ),
+      ),
+    );
+  }
+}
+```
+
+#### Change user agent
 
 ```dart
 player.setUserAgent(userAgent);
@@ -382,8 +422,6 @@ record.start();
 
 Everything is already set up.
 
-<!--
-
 ### macOS
 
 To run on macOS, install CMake through [Homebrew](https://brew.sh):
@@ -400,8 +438,6 @@ If you encounter the error `cmake: command not found` during archiving:
 ```bash
 sudo "/Applications/CMake.app/Contents/bin/cmake-gui" --install
 ```
-
--->
 
 ### Linux
 
@@ -447,16 +483,6 @@ end
 For the example project to work you need to configure a real device in the xcode project, or comment out the build script `Build Device lib` in in `ios/dart_vlc.podspec`.
 
 -->
-
-## Support
-
-Consider sponsoring this project. Maintenance of open-source software & libraries is severely under-paid or not paid at all.
-
-Writing C++ & native code is a very tedious process.
-
-- [PayPal](https://paypal.me/alexmercerind)
-- [Patreon](https://patreon.com/harmonoid)
-- [GitHub Sponsors](https://github.com/sponsors/alexmercerind)
 
 ## Acknowledgements
 
