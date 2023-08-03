@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:convert';
@@ -8,6 +9,9 @@ void main() async {
   DartVLC.initialize();
   runApp(DartVLCExample());
 }
+
+// Global Variables
+// String networkMediaLink = "";
 
 class DartVLCExample extends StatefulWidget {
   @override
@@ -21,9 +25,9 @@ class DartVLCExampleState extends State<DartVLCExample> {
     commandlineArguments: [
       ":clock-jitter=0",
       ":clock-synchro=0",
-      "--rtsp-caching=300",
-      "--tcp-caching=300",
-      "--realrtsp-caching=300",
+      // "--rtsp-caching=300",
+      // "--tcp-caching=300",
+      // "--realrtsp-caching=300",
       "--network-caching=300",
       ":live-caching=300",
       ":file-caching=300",
@@ -86,6 +90,19 @@ class DartVLCExampleState extends State<DartVLCExample> {
       equalizer.setBandAmp(31.25, 10.0);
       this.player.setEqualizer(equalizer);
     }
+  }
+
+  void recorder({bool dispose = false}) {
+    Record record = Record.create(id: 0, media: Media.network(medias[0].resource), savingFile: File('/Users/nilansh/Downloads/'));
+    if (dispose == false) {
+      record.start();
+    }
+    if (dispose == true) {
+      record.dispose();
+      print('Dispose!!!');
+    }
+    print(medias[0].resource);
+    print('Successfully tapped!!! ::: Medias at 0 index: ${medias[0]}');
   }
 
   @override
@@ -693,6 +710,36 @@ class DartVLCExampleState extends State<DartVLCExample> {
                   onPressed: () => this.player.previous(),
                   child: const Text(
                     'previous',
+                    style: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12.0),
+                ElevatedButton(
+                    onPressed: () => this.player.takeSnapshot(File('/Users/nilansh/Downloads/'), 1920, 1080),
+                    child: const Text(
+                        'Snapshot',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                      ),
+                    ),
+                ),
+                const SizedBox(width: 12.0),
+                ElevatedButton(
+                  onPressed: () => recorder(dispose: false),
+                  child: const Text(
+                    'Start Recording',
+                    style: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12.0),
+                ElevatedButton(
+                  onPressed: () => recorder(dispose: true),
+                  child: const Text(
+                    'Stop Recording',
                     style: TextStyle(
                       fontSize: 14.0,
                     ),
