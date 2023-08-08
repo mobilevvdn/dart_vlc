@@ -17,8 +17,10 @@
 // Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "record/record.h"
-
+#include <iostream>
 #include <sstream>
+
+using namespace std;
 
 Record::Record(std::shared_ptr<Media> media, std::string saving_file)
     : media_(media), saving_file_(saving_file) {
@@ -28,10 +30,15 @@ Record::Record(std::shared_ptr<Media> media, std::string saving_file)
 
 void Record::Start() {
   std::stringstream sout;
-  sout << "#std{access=file,mux=raw,dst=" << saving_file_ << "}";
-  libvlc_vlm_add_broadcast(vlc_instance_.get(), media_->location().c_str(),
-                           media_->location().c_str(), sout.str().c_str(), 0,
-                           nullptr, true, false);
+  sout << "#std{access=file,mux=mp4,dst=" << saving_file_ << "}";
+  int status = libvlc_vlm_add_broadcast(vlc_instance_.get(), media_->location().c_str(),
+                                          media_->location().c_str(), sout.str().c_str(), 0,
+                                          nullptr, true, false);
+  if (status == -1) {
+    const char* errr = libvlc_errmsg();
+    cout << "Native Record errr " << errr <<"\n";
+    libvlc_clearerr();
+  }
   libvlc_vlm_play_media(vlc_instance_.get(), media_->location().c_str());
 }
 
