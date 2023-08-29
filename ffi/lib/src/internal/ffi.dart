@@ -199,51 +199,51 @@ final ReceivePort receiver = ReceivePort()
     switch (type) {
       case 'playbackEvent':
         {
-          players[id]!.playback.isPlaying = event[2];
-          players[id]!.playback.isSeekable = event[3];
-          players[id]!.playback.isCompleted = false;
-          if (!players[id]!.playbackController.isClosed) {
-            players[id]!.playbackController.add(players[id]!.playback);
+          players[id]?.playback.isPlaying = event[2];
+          players[id]?.playback.isSeekable = event[3];
+          players[id]?.playback.isCompleted = false;
+          if (players[id]!.playbackController.isClosed == false) {
+            players[id]?.playbackController.add(players[id]!.playback);
           }
           break;
         }
       case 'positionEvent':
         {
-          players[id]!.position.position = Duration(milliseconds: event[3]);
-          players[id]!.position.duration = Duration(milliseconds: event[4]);
-          if (!players[id]!.positionController.isClosed) {
-            players[id]!.positionController.add(players[id]!.position);
+          players[id]?.position.position = Duration(milliseconds: event[3]);
+          players[id]?.position.duration = Duration(milliseconds: event[4]);
+          if (players[id]?.positionController.isClosed == false) {
+            players[id]?.positionController.add(players[id]!.position);
           }
           break;
         }
       case 'completeEvent':
         {
-          players[id]!.playback.isCompleted = event[2];
-          if (!players[id]!.playbackController.isClosed) {
-            players[id]!.playbackController.add(players[id]!.playback);
+          players[id]?.playback.isCompleted = event[2];
+          if (players[id]?.playbackController.isClosed == false) {
+            players[id]?.playbackController.add(players[id]!.playback);
           }
           break;
         }
       case 'volumeEvent':
         {
-          players[id]!.general.volume = event[2];
-          if (!players[id]!.generalController.isClosed) {
+          players[id]?.general.volume = event[2];
+          if (players[id]?.generalController.isClosed == false) {
             players[id]!.generalController.add(players[id]!.general);
           }
           break;
         }
       case 'rateEvent':
         {
-          players[id]!.general.rate = event[2];
-          if (!players[id]!.generalController.isClosed) {
-            players[id]!.generalController.add(players[id]!.general);
+          players[id]?.general.rate = event[2];
+          if (players[id]?.generalController.isClosed == false) {
+            players[id]?.generalController.add(players[id]!.general);
           }
           break;
         }
       case 'openEvent':
         {
-          players[id]!.current.index = event[2];
-          players[id]!.current.isPlaylist = event[3];
+          players[id]?.current.index = event[2];
+          players[id]?.current.isPlaylist = event[3];
           assert(event[4].length == event[5].length);
           int length = event[4].length;
           List<Media> medias = [];
@@ -266,20 +266,18 @@ final ReceivePort receiver = ReceivePort()
                 }
             }
           }
-          players[id]!.current.medias = medias;
-          players[id]!.current.media = medias[players[id]!.current.index!];
-          if (!players[id]!.currentController.isClosed) {
-            players[id]!.currentController.add(players[id]!.current);
+          players[id]?.current.medias = medias;
+          players[id]?.current.media = medias[players[id]!.current.index!];
+          if (players[id]?.currentController.isClosed == false) {
+            players[id]?.currentController.add(players[id]!.current);
           }
           break;
         }
       case 'videoDimensionsEvent':
         {
-          players[id]!.videoDimensions = VideoDimensions(event[2], event[3]);
-          if (!players[id]!.videoDimensionsController.isClosed) {
-            players[id]!
-                .videoDimensionsController
-                .add(players[id]!.videoDimensions);
+          players[id]?.videoDimensions = VideoDimensions(event[2], event[3]);
+          if (players[id]?.videoDimensionsController.isClosed == false) {
+            players[id]?.videoDimensionsController.add(players[id]!.videoDimensions);
           }
           break;
         }
@@ -290,19 +288,17 @@ final ReceivePort receiver = ReceivePort()
         }
       case 'bufferingEvent':
         {
-          players[id]!.bufferingProgress = event[2];
-          if (!players[id]!.bufferingProgressController.isClosed) {
-            players[id]!
-                .bufferingProgressController
-                .add(players[id]!.bufferingProgress);
+          players[id]?.bufferingProgress = event[2];
+          if (players[id]?.bufferingProgressController.isClosed == false) {
+            players[id]?.bufferingProgressController.add(players[id]!.bufferingProgress);
           }
           break;
         }
       default:
         {
-          players[id]!.error = event[2];
-          if (!players[id]!.errorController.isClosed) {
-            players[id]!.errorController.add(players[id]!.error);
+          players[id]?.error = event[2];
+          if (players[id]?.errorController.isClosed == false) {
+            players[id]?.errorController.add(players[id]!.error);
           }
           break;
         }
