@@ -1,6 +1,6 @@
 import 'dart:ffi';
-import 'package:dart_vlc_ffi/src/internal/ffi.dart';
-import 'package:dart_vlc_ffi/src/enums/equalizer_mode.dart';
+import 'package:dart_vlc/src/ffi/internal/ffi.dart';
+import 'package:dart_vlc/src/ffi/enums/equalizer_mode.dart';
 
 /// Defines an [Equalizer] instance for usage in a [Player].
 ///

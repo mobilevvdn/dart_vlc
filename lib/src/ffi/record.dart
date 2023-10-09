@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:ffi/ffi.dart';
-import 'package:dart_vlc_ffi/dart_vlc_ffi.dart';
-import 'package:dart_vlc_ffi/src/internal/ffi.dart';
+import 'package:dart_vlc/src/dart_vlc_ffi.dart';
+import 'package:dart_vlc/src/ffi/internal/ffi.dart';
 
 /// [Record] class may be used to record a [Media] to a local [File] on the disk.
 class Record {

@@ -2,8 +2,8 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:async';
 import 'package:ffi/ffi.dart';
-import 'package:dart_vlc_ffi/dart_vlc_ffi.dart';
-import 'package:dart_vlc_ffi/src/internal/ffi.dart';
+import 'package:dart_vlc/src/dart_vlc_ffi.dart';
+import 'package:dart_vlc/src/ffi/internal/ffi.dart';
 
 /// Represents dimensions of a video.
 class VideoDimensions {

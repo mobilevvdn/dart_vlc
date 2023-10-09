@@ -20,9 +20,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:dart_vlc_ffi/src/device.dart';
-import 'package:dart_vlc_ffi/src/player.dart';
-import 'package:dart_vlc_ffi/src/player_state/player_state.dart';
+import 'package:dart_vlc/src/ffi/device.dart';
+import 'package:dart_vlc/src/ffi/player.dart';
+import 'package:dart_vlc/src/ffi/player_state/player_state.dart';
 
 class Control extends StatefulWidget {
   Control({

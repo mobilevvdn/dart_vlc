@@ -2,10 +2,10 @@ import 'dart:io';
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:path/path.dart' as path;
-import 'package:dart_vlc_ffi/src/internal/ffi.dart';
-import 'package:dart_vlc_ffi/src/media_source/media_source.dart';
-import 'package:dart_vlc_ffi/src/enums/media_source_type.dart';
-import 'package:dart_vlc_ffi/src/enums/media_type.dart';
+import 'package:dart_vlc/src/ffi/internal/ffi.dart';
+import 'package:dart_vlc/src/ffi/media_source/media_source.dart';
+import 'package:dart_vlc/src/ffi/enums/media_source_type.dart';
+import 'package:dart_vlc/src/ffi/enums/media_type.dart';
 
 /// A media object to open inside a [Player].
 ///

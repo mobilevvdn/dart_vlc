@@ -1,6 +1,6 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
-import 'package:dart_vlc_ffi/src/internal/ffi.dart';
+import 'package:dart_vlc/src/ffi/internal/ffi.dart';
 
 /// Represents a playback [Device] for the [Player].
 class Device {

@@ -2,17 +2,17 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
-import 'package:dart_vlc_ffi/src/internal/dynamiclibrary.dart';
-import 'package:dart_vlc_ffi/src/internal/typedefs/player.dart';
-import 'package:dart_vlc_ffi/src/internal/typedefs/media.dart';
-import 'package:dart_vlc_ffi/src/internal/typedefs/devices.dart';
-import 'package:dart_vlc_ffi/src/internal/typedefs/equalizer.dart';
-import 'package:dart_vlc_ffi/src/internal/typedefs/record.dart';
-import 'package:dart_vlc_ffi/src/internal/typedefs/broadcast.dart';
-import 'package:dart_vlc_ffi/src/internal/typedefs/chromecast.dart';
+import 'package:dart_vlc/src/ffi/internal/dynamiclibrary.dart';
+import 'package:dart_vlc/src/ffi/internal/typedefs/player.dart';
+import 'package:dart_vlc/src/ffi/internal/typedefs/media.dart';
+import 'package:dart_vlc/src/ffi/internal/typedefs/devices.dart';
+import 'package:dart_vlc/src/ffi/internal/typedefs/equalizer.dart';
+import 'package:dart_vlc/src/ffi/internal/typedefs/record.dart';
+import 'package:dart_vlc/src/ffi/internal/typedefs/broadcast.dart';
+import 'package:dart_vlc/src/ffi/internal/typedefs/chromecast.dart';
 // Here for sending event callbacks.
-import 'package:dart_vlc_ffi/src/player.dart';
-import 'package:dart_vlc_ffi/src/media_source/media.dart';
+import 'package:dart_vlc/src/ffi/player.dart';
+import 'package:dart_vlc/src/ffi/media_source/media.dart';
 
 abstract class PlayerFFI {
   static final PlayerCreateDart create = dynamicLibrary

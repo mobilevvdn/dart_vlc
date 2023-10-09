@@ -1,6 +1,6 @@
 import 'dart:ffi';
-import 'package:dart_vlc_ffi/src/internal/ffi.dart';
-import 'package:dart_vlc_ffi/src/internal/dynamiclibrary.dart';
+import 'package:dart_vlc/src/ffi/internal/ffi.dart';
+import 'package:dart_vlc/src/ffi/internal/dynamiclibrary.dart';
 
 typedef InitializeDartApiCXX = Void Function(
     Pointer<NativeFunction<Int8 Function(Int64, Pointer<Dart_CObject>)>>

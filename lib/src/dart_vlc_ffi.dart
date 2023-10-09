@@ -16,18 +16,18 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-export 'package:dart_vlc_ffi/src/player.dart';
-export 'package:dart_vlc_ffi/src/equalizer.dart';
-export 'package:dart_vlc_ffi/src/broadcast.dart';
-export 'package:dart_vlc_ffi/src/chromecast.dart';
-export 'package:dart_vlc_ffi/src/record.dart';
-export 'package:dart_vlc_ffi/src/device.dart';
-export 'package:dart_vlc_ffi/src/player_state/player_state.dart';
-export 'package:dart_vlc_ffi/src/media_source/media_source.dart';
-export 'package:dart_vlc_ffi/src/media_source/media.dart';
-export 'package:dart_vlc_ffi/src/media_source/playlist.dart';
-export 'package:dart_vlc_ffi/src/enums/equalizer_mode.dart';
-export 'package:dart_vlc_ffi/src/enums/media_source_type.dart';
-export 'package:dart_vlc_ffi/src/enums/media_type.dart';
-export 'package:dart_vlc_ffi/src/enums/playlist_mode.dart';
-export 'package:dart_vlc_ffi/src/internal/initializer.dart';
+export 'package:dart_vlc/src/ffi/player.dart';
+export 'package:dart_vlc/src/ffi/equalizer.dart';
+export 'ffi/broadcast.dart';
+export 'ffi/chromecast.dart';
+export 'ffi/record.dart';
+export 'ffi/device.dart';
+export 'package:dart_vlc/src/ffi/player_state/player_state.dart';
+export 'package:dart_vlc/src/ffi/media_source/media_source.dart';
+export 'package:dart_vlc/src/ffi/media_source/media.dart';
+export 'package:dart_vlc/src/ffi/media_source/playlist.dart';
+export 'package:dart_vlc/src/ffi/enums/equalizer_mode.dart';
+export 'package:dart_vlc/src/ffi/enums/media_source_type.dart';
+export 'package:dart_vlc/src/ffi/enums/media_type.dart';
+export 'package:dart_vlc/src/ffi/enums/playlist_mode.dart';
+export 'package:dart_vlc/src/ffi/internal/initializer.dart';
