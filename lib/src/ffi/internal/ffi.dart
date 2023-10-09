@@ -202,7 +202,7 @@ final ReceivePort receiver = ReceivePort()
           players[id]?.playback.isPlaying = event[2];
           players[id]?.playback.isSeekable = event[3];
           players[id]?.playback.isCompleted = false;
-          if (players[id]!.playbackController.isClosed == false) {
+          if (players[id]?.playbackController.isClosed == false) {
             players[id]?.playbackController.add(players[id]!.playback);
           }
           break;
