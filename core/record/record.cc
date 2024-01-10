@@ -29,11 +29,21 @@ Record::Record(std::shared_ptr<Media> media, std::string saving_file)
 }
 
 void Record::Start() {
+  const char *vlmOptions[] = {
+        "--sout-mux-caching=300",  // Set caching (adjust value as needed)
+        "--sout-ts-caching=300",
+        "--rtsp-tcp",
+        "--drop-late-frames",
+        "--skip-frames",
+        "--rtsp-frame-buffer-size=300",   // Set transport stream caching
+    };
+  cout << "RecordStart Started Inside"<<"\n";
   std::stringstream sout;
-  sout << "#std{access=file,mux=mp4,dst=" << saving_file_ << "}";
+  sout << "#transcode{vcodec=mp4v}:std{access=file,mux=mp4,dst=" << saving_file_ << "}";
   int status = libvlc_vlm_add_broadcast(vlc_instance_.get(), media_->location().c_str(),
-                                          media_->location().c_str(), sout.str().c_str(), 0,
-                                          nullptr, true, false);
+                                          media_->location().c_str(), sout.str().c_str(), 1,
+                                          vlmOptions, true, false);
+  cout << "RecordStart Status:"<< status <<"\n";
   if (status == -1) {
     const char* errr = libvlc_errmsg();
     cout << "Native Record errr " << errr <<"\n";

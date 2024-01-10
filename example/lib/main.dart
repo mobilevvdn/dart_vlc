@@ -20,30 +20,31 @@ class DartVLCExample extends StatefulWidget {
 
 class DartVLCExampleState extends State<DartVLCExample> {
   Player player = Player(
-    id: 0,
-    videoDimensions: VideoDimensions(640, 360),
-    commandlineArguments: [
-      ":clock-jitter=0",
-      ":clock-synchro=0",
-      // "--rtsp-caching=300",
-      // "--tcp-caching=300",
-      // "--realrtsp-caching=300",
-      "--network-caching=300",
-      ":live-caching=300",
-      ":file-caching=300",
-      "--file-caching",
-      "--sout-mux-caching=300",
-      "--no-drop-late-frames",
-      "--no-skip-frames",
-      ":rtsp-frame-buffer-size=300",
-      "--rtsp-tcp",
-      "--http-reconnect",
-      "--deinterlace",
-      // Call getDeblocking and add the result here
-      "--deinterlace-mode={discard,blend,mean,bob,linear,x}",
-      "--network-synchronisation",
-    ]
-  );
+      id: 0,
+      videoDimensions: VideoDimensions(640, 360),
+      commandlineArguments: [
+        "--clock-jitter=0",
+        "--clock-synchro=0",
+        // "--rtsp-caching=300",
+        // "--tcp-caching=300",
+        // "--realrtsp-caching=300",
+        "--network-caching=300",
+        "--live-caching=300",
+        "--file-caching=300",
+        "--file-caching",
+        "--sout-mux-caching=300",
+        //"--no-drop-late-frames",
+        //"--no-skip-frames",
+        "--drop-late-frames",
+        "--skip-frames",
+        "--rtsp-frame-buffer-size=300",
+        "--rtsp-tcp",
+        // "--http-reconnect",
+        "--deinterlace",
+        // Call getDeblocking and add the result here
+        "--deinterlace-mode={discard,blend,mean,bob,linear,x}",
+        "--network-synchronisation",
+      ]);
   MediaType mediaType = MediaType.file;
   CurrentState current = CurrentState();
   PositionState position = PositionState();
@@ -93,7 +94,10 @@ class DartVLCExampleState extends State<DartVLCExample> {
   }
 
   void recorder({bool dispose = false}) {
-    Record record = Record.create(id: 0, media: Media.network(medias[0].resource), savingFile: File('/Users/nilansh/Downloads/'));
+    Record record = Record.create(
+        id: 0,
+        media: Media.network(medias[0].resource),
+        savingFile: File('C:\\Users\\VVSA\\Videos\\Cpplus\\recording.mp4'));
     if (dispose == false) {
       record.start();
     }
@@ -137,14 +141,14 @@ class DartVLCExampleState extends State<DartVLCExample> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               Video(
-                        player: player,
-                        width: isPhone ? 320 : 640,
-                        height: isPhone ? 180 : 360,
-                        volumeThumbColor: Colors.blue,
-                        volumeActiveColor: Colors.blue,
-                        showControls: !isPhone,
-                      ),
+                Video(
+                  player: player,
+                  width: isPhone ? 320 : 640,
+                  height: isPhone ? 180 : 360,
+                  volumeThumbColor: Colors.blue,
+                  volumeActiveColor: Colors.blue,
+                  showControls: !isPhone,
+                ),
               ],
             ),
             Row(
@@ -717,13 +721,14 @@ class DartVLCExampleState extends State<DartVLCExample> {
                 ),
                 const SizedBox(width: 12.0),
                 ElevatedButton(
-                    onPressed: () => this.player.takeSnapshot(File('/Users/nilansh/Downloads/'), 1920, 1080),
-                    child: const Text(
-                        'Snapshot',
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
+                  onPressed: () => this.player.takeSnapshot(
+                      File('/Users/nilansh/Downloads/'), 1920, 1080),
+                  child: const Text(
+                    'Snapshot',
+                    style: TextStyle(
+                      fontSize: 14.0,
                     ),
+                  ),
                 ),
                 const SizedBox(width: 12.0),
                 ElevatedButton(

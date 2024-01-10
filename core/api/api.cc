@@ -19,6 +19,8 @@
 #include "api/api.h"
 
 #include "core.h"
+#include <iostream>
+using namespace std;
 
 namespace DartObjects {
 
@@ -446,11 +448,14 @@ void RecordCreate(int32_t id, const char* saving_file, const char* type,
 }
 
 void RecordStart(int32_t id) {
+  cout << "RecordStart"<<"\n";
   auto record = g_records->Get(id);
   if (!record) {
+    cout << "RecordStart Init"<<"\n";
     g_records->Create(id, std::make_unique<Record>(nullptr, ""));
     record = g_records->Get(id);
   }
+  cout << "RecordStart Started"<<"\n";
   record->Start();
 }
 
