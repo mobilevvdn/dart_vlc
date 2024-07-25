@@ -85,10 +85,7 @@ add_library(${LIBRARY_NAME} STATIC
   player/player_state.cc
   media_source/media.cc
   media_source/playlist.cc
-  equalizer/equalizer.cc
   devices/devices.cc
-  broadcast/broadcast.cc
-  chromecast/chromecast.cc
   record/record.cc
 )
 

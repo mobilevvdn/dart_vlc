@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "devices/devices.h"
-#include "equalizer/equalizer.h"
 #include "media_source/playlist.h"
 
 class PlayerState {

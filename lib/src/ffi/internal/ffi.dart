@@ -137,20 +137,6 @@ abstract class BroadcastFFI {
       .asFunction();
 }
 
-abstract class ChromecastFFI {
-  static final ChromecastCreateDart create = dynamicLibrary
-      .lookup<NativeFunction<ChromecastCreateCXX>>('ChromecastCreate')
-      .asFunction();
-
-  static final ChromecastStartDart start = dynamicLibrary
-      .lookup<NativeFunction<ChromecastStartCXX>>('ChromecastStart')
-      .asFunction();
-
-  static final ChromecastDisposeDart dispose = dynamicLibrary
-      .lookup<NativeFunction<ChromecastDisposeCXX>>('ChromecastDispose')
-      .asFunction();
-}
-
 abstract class RecordFFI {
   static final RecordCreateDart create = dynamicLibrary
       .lookup<NativeFunction<RecordCreateCXX>>('RecordCreate')
@@ -168,24 +154,6 @@ abstract class RecordFFI {
 abstract class DevicesFFI {
   static final DevicesAllDart all = dynamicLibrary
       .lookup<NativeFunction<DevicesAllCXX>>('DevicesAll')
-      .asFunction();
-}
-
-abstract class EqualizerFFI {
-  static final EqualizerCreateEmptyDart createEmpty = dynamicLibrary
-      .lookup<NativeFunction<EqualizerCreateEmptyCXX>>('EqualizerCreateEmpty')
-      .asFunction();
-
-  static final EqualizerCreateModeDart createMode = dynamicLibrary
-      .lookup<NativeFunction<EqualizerCreateModeCXX>>('EqualizerCreateMode')
-      .asFunction();
-
-  static final EqualizerSetBandAmpDart setBandAmp = dynamicLibrary
-      .lookup<NativeFunction<EqualizerSetBandAmpCXX>>('EqualizerSetBandAmp')
-      .asFunction();
-
-  static final EqualizerSetPreAmpDart setPreAmp = dynamicLibrary
-      .lookup<NativeFunction<EqualizerSetPreAmpCXX>>('EqualizerSetPreAmp')
       .asFunction();
 }
 

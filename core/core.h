@@ -20,9 +20,7 @@
 #define CORE_H_
 
 #include "broadcast/broadcast.h"
-#include "chromecast/chromecast.h"
 #include "devices/devices.h"
-#include "equalizer/equalizer.h"
 #include "media_source/media.h"
 #include "media_source/playlist.h"
 #include "player/player.h"
@@ -44,10 +42,7 @@ extern "C" {
 // TODO: Get rid of global variables & linking hack.
 
 extern std::unique_ptr<InstanceHandler<Player>> g_players;
-extern std::unique_ptr<InstanceHandler<Equalizer>> g_equalizers;
-extern std::unique_ptr<InstanceHandler<Broadcast>> g_broadcasts;
 extern std::unique_ptr<InstanceHandler<Record>> g_records;
-extern std::unique_ptr<InstanceHandler<Chromecast>> g_chromecasts;
 
 #ifdef __cplusplus
 }

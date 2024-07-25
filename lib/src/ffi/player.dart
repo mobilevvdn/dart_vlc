@@ -381,11 +381,6 @@ class Player {
     );
   }
 
-  /// Sets [Equalizer] for the [Player].
-  void setEqualizer(Equalizer equalizer) {
-    PlayerFFI.setEqualizer(id, equalizer.id);
-  }
-
   /// Saves snapshot of a video to a desired [File] location.
   void takeSnapshot(File file, int width, int height) {
     final filePathCStr = file.path.toNativeUtf8();

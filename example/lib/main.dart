@@ -86,10 +86,6 @@ class DartVLCExampleState extends State<DartVLCExample> {
         print('libvlc error.');
       });
       this.devices = Devices.all;
-      Equalizer equalizer = Equalizer.createMode(EqualizerMode.live);
-      equalizer.setPreAmp(10.0);
-      equalizer.setBandAmp(31.25, 10.0);
-      this.player.setEqualizer(equalizer);
     }
   }
 

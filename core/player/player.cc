@@ -159,10 +159,6 @@ void Player::SetPlaylistMode(PlaylistMode playlist_mode) {
       static_cast<libvlc_playback_mode_t>(playlist_mode));
 }
 
-void Player::SetEqualizer(Equalizer* equalizer) {
-  vlc_media_player_.setEqualizer(*equalizer->vlc_equalizer());
-}
-
 void Player::SetUserAgent(std::string user_agent) {
   vlc_instance_.setUserAgent("dart_vlc", user_agent);
 }

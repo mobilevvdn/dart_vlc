@@ -73,8 +73,6 @@ class Player {
 
   void SetPlaylistMode(PlaylistMode playlist_mode);
 
-  void SetEqualizer(Equalizer* equalizer);
-
   void SetUserAgent(std::string user_agent);
 
   void Add(std::shared_ptr<Media> media);

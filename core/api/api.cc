@@ -242,17 +242,6 @@ void PlayerSetDevice(int32_t id, const char* device_id,
   player->SetDevice(device);
 }
 
-void PlayerSetEqualizer(int32_t id, int32_t equalizer_id) {
-  auto player = g_players->Get(id);
-  if (!player) {
-    g_players->Create(
-        id, std::move(std::make_unique<Player>(std::vector<std::string>{})));
-    player = g_players->Get(id);
-  }
-  Equalizer* equalizer = g_equalizers->Get(equalizer_id);
-  player->SetEqualizer(equalizer);
-}
-
 void PlayerSetPlaylistMode(int32_t id, const char* mode) {
   auto player = g_players->Get(id);
   if (!player) {
@@ -391,52 +380,6 @@ const char** MediaParse(Dart_Handle object, const char* type,
   return values->data();
 }
 
-void BroadcastCreate(int32_t id, const char* type, const char* resource,
-                     const char* access, const char* mux, const char* dst,
-                     const char* vcodec, int32_t vb, const char* acodec,
-                     int32_t ab) {
-  std::shared_ptr<Media> media = Media::Create(type, resource);
-  std::unique_ptr<BroadcastConfiguration> configuration =
-      std::make_unique<BroadcastConfiguration>(access, mux, dst, vcodec, vb,
-                                               acodec, ab);
-  if (!g_broadcasts->Get(id)) {
-    g_broadcasts->Create(id, std::make_unique<Broadcast>(
-                                 std::move(media), std::move(configuration)));
-  }
-}
-
-void BroadcastStart(int32_t id) {
-  auto broadcast = g_broadcasts->Get(id);
-  if (!broadcast) {
-    g_broadcasts->Create(id, std::make_unique<Broadcast>(nullptr, nullptr));
-    broadcast = g_broadcasts->Get(id);
-  }
-  broadcast->Start();
-}
-
-void BroadcastDispose(int32_t id) { g_broadcasts->Dispose(id); }
-
-void ChromecastCreate(int32_t id, const char* type, const char* resource,
-                      const char* ip_address) {
-  std::shared_ptr<Media> media = Media::Create(type, resource);
-  auto chromecast = g_chromecasts->Get(id);
-  if (!chromecast) {
-    g_chromecasts->Create(
-        id, std::make_unique<Chromecast>(std::move(media), ip_address));
-  }
-}
-
-void ChromecastStart(int32_t id) {
-  auto chromecast = g_chromecasts->Get(id);
-  if (!chromecast) {
-    g_chromecasts->Create(id, std::make_unique<Chromecast>(nullptr, ""));
-    chromecast = g_chromecasts->Get(id);
-  }
-  chromecast->Start();
-}
-
-void ChromecastDispose(int32_t id) { g_chromecasts->Dispose(id); }
-
 void RecordCreate(int32_t id, const char* saving_file, const char* type,
                   const char* resource) {
   std::shared_ptr<Media> media = Media::Create(type, resource);
@@ -477,48 +420,6 @@ DartDeviceList* DevicesAll(Dart_Handle object) {
       object, wrapper, sizeof(*wrapper),
       static_cast<Dart_HandleFinalizer>(DartObjects::DestroyObject));
   return &wrapper->dart_object;
-}
-
-static DartEqualizer* EqualizerToDart(const Equalizer* equalizer, int32_t id,
-                                      Dart_Handle dart_handle) {
-  auto wrapper = new DartObjects::Equalizer();
-  for (const auto& [band, amp] : equalizer->band_amps()) {
-    wrapper->bands.emplace_back(band);
-    wrapper->amps.emplace_back(amp);
-  }
-
-  wrapper->dart_object.id = id;
-  wrapper->dart_object.pre_amp = equalizer->pre_amp();
-  wrapper->dart_object.bands = wrapper->bands.data();
-  wrapper->dart_object.amps = wrapper->amps.data();
-  wrapper->dart_object.size = wrapper->amps.size();
-
-  Dart_NewFinalizableHandle_DL(
-      dart_handle, wrapper, sizeof(*wrapper),
-      static_cast<Dart_HandleFinalizer>(DartObjects::DestroyObject));
-
-  return &wrapper->dart_object;
-}
-
-struct DartEqualizer* EqualizerCreateEmpty(Dart_Handle object) {
-  auto id = g_equalizers->Count();
-  g_equalizers->Create(id, std::make_unique<Equalizer>());
-  return EqualizerToDart(g_equalizers->Get(id), id, object);
-}
-
-struct DartEqualizer* EqualizerCreateMode(Dart_Handle object, int32_t mode) {
-  auto id = g_equalizers->Count();
-  g_equalizers->Create(
-      id, std::make_unique<Equalizer>(static_cast<EqualizerMode>(mode)));
-  return EqualizerToDart(g_equalizers->Get(id), id, object);
-}
-
-void EqualizerSetBandAmp(int32_t id, float band, float amp) {
-  g_equalizers->Get(id)->SetBandAmp(band, amp);
-}
-
-void EqualizerSetPreAmp(int32_t id, float amp) {
-  g_equalizers->Get(id)->SetPreAmp(amp);
 }
 
 #ifdef __cplusplus

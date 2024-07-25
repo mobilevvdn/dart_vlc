@@ -107,23 +107,6 @@ DLLEXPORT void PlayerSetHWND(int32_t id, int64_t hwnd);
 DLLEXPORT const char** MediaParse(Dart_Handle object, const char* type,
                                   const char* resource, int32_t timeout);
 
-DLLEXPORT void BroadcastCreate(int32_t id, const char* type,
-                               const char* resource, const char* access,
-                               const char* mux, const char* dst,
-                               const char* vcodec, int32_t vb,
-                               const char* acodec, int32_t ab);
-
-DLLEXPORT void BroadcastStart(int32_t id);
-
-DLLEXPORT void BroadcastDispose(int32_t id);
-
-DLLEXPORT void ChromecastCreate(int32_t id, const char* type,
-                                const char* resource, const char* ip_address);
-
-DLLEXPORT void ChromecastStart(int32_t id);
-
-DLLEXPORT void ChromecastDispose(int32_t id);
-
 DLLEXPORT void RecordCreate(int32_t id, const char* saving_file,
                             const char* type, const char* resource);
 
@@ -132,15 +115,6 @@ DLLEXPORT void RecordStart(int32_t id);
 DLLEXPORT void RecordDispose(int32_t id);
 
 DLLEXPORT DartDeviceList* DevicesAll(Dart_Handle object);
-
-DLLEXPORT struct DartEqualizer* EqualizerCreateEmpty(Dart_Handle object);
-
-DLLEXPORT struct DartEqualizer* EqualizerCreateMode(Dart_Handle object,
-                                                    int32_t mode);
-
-DLLEXPORT void EqualizerSetBandAmp(int32_t id, float band, float amp);
-
-DLLEXPORT void EqualizerSetPreAmp(int32_t id, float amp);
 
 #ifdef __cplusplus
 }

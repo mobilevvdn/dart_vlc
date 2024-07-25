@@ -17,9 +17,7 @@
 // Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "broadcast/broadcast.h"
-#include "chromecast/chromecast.h"
 #include "devices/devices.h"
-#include "equalizer/equalizer.h"
 #include "media_source/media.h"
 #include "media_source/playlist.h"
 #include "player/player.h"
@@ -33,10 +31,7 @@ extern "C" {
 // TODO: Get rid of global variables & linking hack.
 
 auto g_players = std::make_unique<InstanceHandler<Player>>();
-auto g_equalizers = std::make_unique<InstanceHandler<Equalizer>>();
-auto g_broadcasts = std::make_unique<InstanceHandler<Broadcast>>();
 auto g_records = std::make_unique<InstanceHandler<Record>>();
-auto g_chromecasts = std::make_unique<InstanceHandler<Chromecast>>();
 
 #ifdef __cplusplus
 }
